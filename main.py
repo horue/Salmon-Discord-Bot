@@ -6,8 +6,7 @@ from modules.general import *
 
 
 
-## Bot Connection ##
-
+## Bot configuration ##
 
 intents = discord.Intents.default()
 intents = discord.Intents.all()
@@ -18,6 +17,10 @@ bot = commands.Bot(
   status=discord.Status.online, 
   intents=intents)
 tree = bot.tree
+
+
+## Bot Connection ##
+
 
 @bot.event
 async def on_ready():
