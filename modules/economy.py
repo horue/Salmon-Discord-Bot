@@ -22,7 +22,7 @@ async def check_money(server_id, user_id):
             print('No wallet found for this user.')
 
 
-
-#asyncio.run(create_wallet(123, 10, 10, 999))
-asyncio.run(check_money(123, 999))
-asyncio.run(check_money(123, 789))
+if __name__ == '__main__':
+    #asyncio.run(create_wallet(123, 10, 10, 999))
+    asyncio.run(check_money(123, 999))
+    asyncio.run(check_money(123, 789))
