@@ -10,7 +10,12 @@ from tokens import bot_token
 
 intents = discord.Intents.default()
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix = '-', case_insensitive = True, activity=discord.CustomActivity(name="Use '--help' for help"), status=discord.Status.online, intents=intents)
+bot = commands.Bot(
+  command_prefix = 's!', 
+  case_insensitive = True, 
+  activity=discord.CustomActivity(name="Use s! for the commands"), 
+  status=discord.Status.online, 
+  intents=intents)
 tree = bot.tree
 
 @bot.event
