@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 from tokens import bot_token
+from modules.general import *
 
 
 
@@ -25,20 +26,28 @@ async def on_ready():
 
 
 
-## General Commands ##
+## Testing Functions ##
 
 
 @tree.command(name='test', description="This is a test command.")
 async def teste(interaction: discord.Interaction):
-  await interaction.response.send_message("Testing")
+  await testing(interaction)
+
+
+@bot.command()
+async def test(ctx='test'):
+  await testing(ctx)
+
+
+
+@tree.command(name='ping', description="This is the ping pong test!.")
+async def teste(interaction: discord.Interaction):
+  await pong(interaction)
+
 
 @bot.command()
 async def ping(ctx='ping'):
-  await ctx.send("pong!")
-
-
-
-
+  await pong(ctx)
 
 
 bot.run(bot_token)
