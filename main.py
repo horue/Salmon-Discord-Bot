@@ -1,4 +1,6 @@
+import os
 import discord
+import datetime
 from discord.ext import commands
 from discord import app_commands
 from modules.firebase import link as firebase
@@ -26,8 +28,10 @@ tree = bot.tree
 
 @bot.event
 async def on_ready():
+  now = datetime.datetime.now()
+  formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
   await tree.sync()
-  print(f'{GREEN}Entramos como:{RESET}' +' {0.user}' . format(bot))
+  print(f'{GREY}{formatted_datetime}{RESET} {BLUE}{'INFO'}{RESET}     {GREEN}Success: {RESET}' + 'logged in with '+'{0.user}' . format(bot))
 
 
 ## Economy Functions ##
@@ -66,4 +70,8 @@ async def ping(ctx='ping'):
   await pong(ctx)
 
 
-bot.run(bot_token)
+def run_bot():
+  os.system('cls')
+  bot.run(bot_token)
+
+run_bot()
