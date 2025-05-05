@@ -1,9 +1,11 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
-from tokens import bot_token
+from modules.firebase import link as firebase
+from keys.tokens import bot_token
+from modules.economy import *
 from modules.general import *
-
+from assets.colors import *
 
 
 ## Bot configuration ##
@@ -25,7 +27,18 @@ tree = bot.tree
 @bot.event
 async def on_ready():
   await tree.sync()
-  print('Entramos como {0.user}' . format(bot))
+  print(f'{GREEN}Entramos como:{RESET}' +' {0.user}' . format(bot))
+
+
+## Economy Functions ##
+
+
+@bot.command()
+async def wallet(ctx):
+  s_id = ctx.message.guild.id
+  u_id = ctx.message.author.id
+  await check_money(ctx=ctx, server_id=s_id, user_id=u_id)
+
 
 
 
