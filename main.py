@@ -52,6 +52,9 @@ async def wallet(ctx, target=''):
 
 @bot.command()
 async def add(ctx, target='', value=0):
+  if value == 0:
+    await ctx.send("You can't add 0.")
+    return
   if target == '':
     u_id = ctx.message.author.id
   else:
@@ -60,11 +63,6 @@ async def add(ctx, target='', value=0):
     print(target)
   s_id = ctx.message.guild.id
   await add_money(ctx=ctx, server_id=s_id, user_id=u_id, amount=value)
-
-
-
-
-
 
 
 ## Testing Functions ##
