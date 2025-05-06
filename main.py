@@ -50,6 +50,21 @@ async def wallet(ctx, target=''):
   await check_money(ctx=ctx, server_id=s_id, user_id=u_id)
 
 
+@bot.command()
+async def add(ctx, target='', value=0):
+  if target == '':
+    u_id = ctx.message.author.id
+  else:
+    u_id = re.search(r'<@(\d+)>', target)
+    u_id = u_id.group(1)
+    print(target)
+  s_id = ctx.message.guild.id
+  await add_money(ctx=ctx, server_id=s_id, user_id=u_id, amount=value)
+
+
+
+
+
 
 
 ## Testing Functions ##
