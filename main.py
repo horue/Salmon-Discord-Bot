@@ -24,6 +24,13 @@ bot = commands.Bot(
 tree = bot.tree
 
 
+def is_admin_or_has_role(role_name: str):
+    async def predicate(ctx):
+        is_admin = ctx.author.guild_permissions.administrator
+        has_role = discord.utils.get(ctx.author.roles, name=role_name) is not None
+        return is_admin or has_role
+    return commands.check(predicate)
+
 ## Bot Connection ##
 
 
@@ -51,6 +58,7 @@ async def wallet(ctx, target=''):
 
 
 @bot.command()
+@is_admin_or_has_role("Bank Manager")
 async def add(ctx, target='', value=0):
   if value == 0:
     await ctx.send("You can't add 0.")
