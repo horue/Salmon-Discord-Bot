@@ -1,6 +1,7 @@
 import os
 import discord
 import datetime
+import re
 from discord.ext import commands
 from discord import app_commands
 from modules.firebase import link as firebase
@@ -38,9 +39,14 @@ async def on_ready():
 
 
 @bot.command()
-async def wallet(ctx):
+async def wallet(ctx, target=''):
+  if target == '':
+    u_id = ctx.message.author.id
+  else:
+    u_id = re.search(r'<@(\d+)>', target)
+    u_id = u_id.group(1)
+    print(target)
   s_id = ctx.message.guild.id
-  u_id = ctx.message.author.id
   await check_money(ctx=ctx, server_id=s_id, user_id=u_id)
 
 
