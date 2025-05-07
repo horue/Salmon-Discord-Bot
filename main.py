@@ -66,9 +66,10 @@ async def add(ctx, target='', value=0):
   if target == '':
     u_id = ctx.message.author.id
   else:
-    u_id = re.search(r'<@(\d+)>', target)
-    u_id = u_id.group(1)
-    print(target)
+      match = re.search(r'<?@(\d+)>?', target)
+      if match:
+          u_id = int(match.group(1))
+          print(target)
   s_id = ctx.message.guild.id
   await add_money(ctx=ctx, server_id=s_id, user_id=u_id, amount=value)
 
@@ -96,6 +97,21 @@ async def teste(interaction: discord.Interaction):
 async def ping(ctx='ping'):
   await pong(ctx)
 
+
+
+## Error Handling ##
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CheckFailure):
+        embed = discord.Embed(
+            title="❌ Permission Error",
+            description=f"You must be an admin or have the 'Bank Manager' role to use this command.",
+            color=discord.Color.red()
+        )
+        
+        message = await ctx.send(embed=embed)        
+        await message.delete(delay=10)
 
 def run_bot():
   os.system('cls')
