@@ -25,7 +25,7 @@ bot = commands.Bot(
 tree = bot.tree
 
 
-def is_admin_or_has_role(role_name: str):
+def is_admin_or_has_role(role_name: str) -> str:
     async def predicate(ctx):
         is_admin = ctx.author.guild_permissions.administrator
         has_role = discord.utils.get(ctx.author.roles, name=role_name) is not None
@@ -36,7 +36,7 @@ def is_admin_or_has_role(role_name: str):
 
 
 @bot.event
-async def on_ready():
+async def on_ready() -> None:
   now = datetime.datetime.now()
   formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
   await tree.sync()
@@ -64,7 +64,7 @@ async def guide(ctx='guide') -> None:
 
 
 @bot.command()
-async def wallet(ctx, target=''):
+async def wallet(ctx, target='') -> None:
   if target == '':
     u_id = ctx.message.author.id
   else:
@@ -77,7 +77,7 @@ async def wallet(ctx, target=''):
 
 @bot.command()
 @is_admin_or_has_role("Bank Manager")
-async def add(ctx, target='', value=0):
+async def add(ctx, target='', value=0) -> None:
   if value == 0:
     await ctx.send("You can't add 0.")
     return
@@ -96,23 +96,23 @@ async def add(ctx, target='', value=0):
 
 
 @tree.command(name='test', description="This is a test command.")
-async def teste(interaction: discord.Interaction):
+async def teste(interaction: discord.Interaction) -> None:
   await Test.testing(interaction)
 
 
 @bot.command()
-async def test(ctx='test'):
+async def test(ctx='test') -> None:
   await Test.testing(ctx)
 
 
 
 @tree.command(name='ping', description="This is the ping pong test!.")
-async def teste(interaction: discord.Interaction):
+async def teste(interaction: discord.Interaction) -> None:
   await Test.pong(interaction)
 
 
 @bot.command()
-async def ping(ctx='ping'):
+async def ping(ctx='ping') -> None:
   await Test.pong(ctx)
 
 
@@ -120,7 +120,7 @@ async def ping(ctx='ping'):
 ## Error Handling ##
 
 @bot.event
-async def on_command_error(ctx, error):
+async def on_command_error(ctx, error) -> None :
     if isinstance(error, commands.CheckFailure):
         embed = discord.Embed(
             title="❌ Permission Error",
