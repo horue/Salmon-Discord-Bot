@@ -6,16 +6,18 @@ from discord import Interaction
 
 ## Test Commands ##
 
-async def testing(who):
-    match who:
-        case Interaction():
-            await who.response.send_message("Testing!")
-        case Context():
-            await who.send("Testing!")
 
-async def pong(who):
-    match who:
-        case Interaction():
-            await who.response.send_message("pong!")
-        case Context():
-            await who.send("pong!")
+class Test:
+    async def testing(who):
+        match who:
+            case Interaction():
+                await who.response.send_message("Testing!")
+            case Context():
+                await who.send("Testing!")
+
+    async def pong(who):
+        match who:
+            case Interaction():
+                await who.response.send_message("pong!")
+            case Context():
+                await who.send("pong!")
