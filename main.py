@@ -9,6 +9,7 @@ from keys.tokens import bot_token
 from modules.economy import *
 from modules.general import *
 from assets.colors import *
+from modules.guide import *
 
 
 ## Bot configuration ##
@@ -40,6 +41,23 @@ async def on_ready():
   formatted_datetime = now.strftime("%Y-%m-%d %H:%M:%S")
   await tree.sync()
   print(f'{GREY}{formatted_datetime}{RESET} {BLUE}{'INFO'}{RESET}     {GREEN}Success: {RESET}' + 'logged in with '+'{0.user}' . format(bot))
+
+
+
+## Guide Functions ##
+@bot.command()
+async def guide(ctx='guide') -> None:
+  content = await(Guide.starting())
+  embed = discord.Embed(
+            title=content[0],
+            description=content[1],
+            color=discord.Color.blurple()
+        )
+  await ctx.send(embed=embed)   
+
+
+
+
 
 
 ## Economy Functions ##
@@ -79,23 +97,23 @@ async def add(ctx, target='', value=0):
 
 @tree.command(name='test', description="This is a test command.")
 async def teste(interaction: discord.Interaction):
-  await testing(interaction)
+  await Test.testing(interaction)
 
 
 @bot.command()
 async def test(ctx='test'):
-  await testing(ctx)
+  await Test.testing(ctx)
 
 
 
 @tree.command(name='ping', description="This is the ping pong test!.")
 async def teste(interaction: discord.Interaction):
-  await pong(interaction)
+  await Test.pong(interaction)
 
 
 @bot.command()
 async def ping(ctx='ping'):
-  await pong(ctx)
+  await Test.pong(ctx)
 
 
 
