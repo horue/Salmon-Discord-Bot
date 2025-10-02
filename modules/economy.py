@@ -2,10 +2,12 @@ import json
 import requests
 import asyncio
 import discord
+from modules.firebase import link
 from discord.ext import commands
 from discord import app_commands
 from discord import Interaction
 
+firebase = link
 
 async def create_wallet(server_id, bank, wallet, id):
     id = int(id)
